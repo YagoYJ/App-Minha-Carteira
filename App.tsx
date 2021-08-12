@@ -9,8 +9,9 @@ import {
   Rubik_700Bold,
 } from "@expo-google-fonts/rubik";
 
-import Routes from "./src/routes";
+import UnauthenticatedRoutes from "./src/pages/Unauthenticated/routes";
 import { theme } from "./src/theme";
+import AuthRoutes from "./src/pages/Authenticated/routes";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -26,7 +27,8 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <NavigationContainer>
-        <Routes />
+        {/* <UnauthenticatedRoutes /> */}
+        <AuthRoutes />
       </NavigationContainer>
     </ThemeProvider>
   );

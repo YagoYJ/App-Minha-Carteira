@@ -1,10 +1,10 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import Login from "./pages/Unauthenticated/Login";
-import CreateAccount from "./pages/Unauthenticated/CreatAccount";
+import Login from "./Login";
+import CreateAccount from "./CreatAccount";
 
-export default function Routes() {
+export default function UnauthenticatedRoutes() {
   const Stack = createStackNavigator();
   return (
     <Stack.Navigator>
