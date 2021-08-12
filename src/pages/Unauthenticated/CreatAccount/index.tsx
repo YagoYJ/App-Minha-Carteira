@@ -63,7 +63,7 @@ export default function CreateAccount() {
 
               <Buttons>
                 <Button>
-                  <ButtonText>Entrar</ButtonText>
+                  <ButtonText>Criar</ButtonText>
                 </Button>
 
                 <TouchableOpacity
