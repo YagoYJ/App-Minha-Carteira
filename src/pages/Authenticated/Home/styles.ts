@@ -114,3 +114,25 @@ export const TotalValueTextGreen = styled(TotalValueText)`
 export const TotalValueTextRed = styled(TotalValueText)`
   color: ${colors.red};
 `;
+
+export const CategoryContainer = styled.View`
+  width: 100%;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 65px;
+  padding: 0 5%;
+`;
+
+export const CategoryTitle = styled.Text`
+  color: ${colors.darkPrimary};
+  font-size: 22px;
+  font-family: ${fonts.rubikRegular};
+  margin-bottom: 15px;
+`;
+
+export const Categories = styled.View`
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;

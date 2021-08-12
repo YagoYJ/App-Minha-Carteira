@@ -1,6 +1,11 @@
 import React from "react";
+import { theme } from "../../../theme";
+import CategoryCard from "./components/CategoryCard";
 import {
   Card,
+  Categories,
+  CategoryContainer,
+  CategoryTitle,
   Container,
   Header,
   SubTitle,
@@ -47,6 +52,15 @@ export default function Home() {
           </TotalValue>
         </Card>
       </Header>
+
+      <CategoryContainer>
+        <CategoryTitle>Categorias</CategoryTitle>
+        <Categories>
+          <CategoryCard label="Gastos" />
+          <CategoryCard label="Empréstimos" />
+          <CategoryCard label="Recebidos" />
+        </Categories>
+      </CategoryContainer>
     </Container>
   );
 }
