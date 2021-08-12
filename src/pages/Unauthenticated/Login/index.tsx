@@ -1,22 +1,26 @@
 import React, { useState } from "react";
 import { Image, Platform, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
+
+import {
+  Container,
+  Content,
+  Scroll,
+  Logo,
+  Form,
+  Title,
+  Input,
+  LinkText,
+} from "../styles";
+
 import {
   Buttons,
   ButtonText,
-  Container,
-  Content,
-  Form,
   GoolgeButton,
-  Input,
   Links,
-  LinkText,
   LoginButton,
-  Logo,
-  Scroll,
-  Title,
 } from "./styles";
-import { useNavigation } from "@react-navigation/native";
 
 import LogoGoogle from "../../../assets/google.png";
 import LogoMinhaCarteira from "../../../assets/logo-minha-carteira.png";
