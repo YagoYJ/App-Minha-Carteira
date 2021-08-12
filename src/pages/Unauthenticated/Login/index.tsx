@@ -12,6 +12,7 @@ import {
   Links,
   LinkText,
   LoginButton,
+  Logo,
   Scroll,
   Title,
 } from "./styles";
@@ -35,7 +36,7 @@ export default function Login() {
         <Content>
           <Scroll showsVerticalScrollIndicator={false}>
             <Form>
-              <Image source={LogoMinhaCarteira} resizeMode="contain" />
+              <Logo source={LogoMinhaCarteira} resizeMode="contain" />
               <Title>Login</Title>
               <Input
                 placeholder="Email"

@@ -1,4 +1,7 @@
 import styled from "styled-components/native";
+import { theme } from "../../../theme";
+
+const { colors, fonts } = theme.default;
 
 export const Container = styled.KeyboardAvoidingView`
   flex: 1;
@@ -19,11 +22,8 @@ export const Scroll = styled.ScrollView`
   width: 100%;
 `;
 
-export const Logo = styled.View`
-  width: 40%;
-  height: 100px;
-  background-color: #fff;
-  margin: 60px auto 0 auto;
+export const Logo = styled.Image`
+  margin-top: 40px;
 `;
 
 export const Form = styled.View`
@@ -34,9 +34,9 @@ export const Form = styled.View`
 `;
 
 export const Title = styled.Text`
-  color: #ffffff;
+  color: ${colors.white};
   font-size: 25px;
-  font-weight: bold;
+  font-family: ${fonts.rubikBold};
   text-align: center;
   margin-top: 50px;
   margin-bottom: 30px;
@@ -45,11 +45,11 @@ export const Title = styled.Text`
 export const Input = styled.TextInput`
   width: 100%;
   height: 50px;
-  background-color: #fff;
+  background-color: ${colors.white};
   padding: 15px;
   border-radius: 8px;
   border-width: 1px;
-  border-color: #d5dce4;
+  border-color: ${colors.gray};
   margin-bottom: 15px;
 `;
 
@@ -66,25 +66,25 @@ export const Button = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
+  box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 export const GoolgeButton = styled(Button)`
   width: 29%;
-  background-color: #fff;
+  background-color: ${colors.white};
 `;
 
 export const LoginButton = styled(Button)`
   width: 69%;
-  background-color: #294eb1;
+  background-color: ${colors.primary};
   border-width: 1px;
-  border-color: #294eb1;
+  border-color: ${colors.primary};
 `;
 
 export const ButtonText = styled.Text`
-  color: #fff;
+  color: ${colors.white};
   font-size: 15px;
-  font-weight: bold;
+  font-family: ${fonts.rubikBold};
 `;
 
 export const Links = styled.View`
@@ -96,10 +96,10 @@ export const Links = styled.View`
 `;
 
 export const LinkText = styled.Text`
-  color: #ffffff;
+  color: ${colors.white};
   font-size: 13px;
-  font-weight: 300;
+  font-family: ${fonts.rubikLight};
   text-decoration: underline;
-  text-decoration-color: #ffffff;
+  text-decoration-color: ${colors.white};
   line-height: 20px;
 `;
