@@ -3,10 +3,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 import Home from "./Home";
-import Transactions from "./Transactions";
+import TransactionsRoutes from "./Transactions/routes";
 import Profile from "./Profile";
 import { theme } from "../../theme";
-import { Rubik_800ExtraBold } from "@expo-google-fonts/rubik";
 
 export default function AuthRoutes() {
   const AuthTab = createBottomTabNavigator();
@@ -35,7 +34,7 @@ export default function AuthRoutes() {
       />
       <AuthTab.Screen
         name="Transactions"
-        component={Transactions}
+        component={TransactionsRoutes}
         options={{
           tabBarIcon: ({ size, color }) => (
             <FontAwesome5 name="wallet" color={color} size={size} />
