@@ -115,6 +115,13 @@ export const TotalValueTextRed = styled(TotalValueText)`
   color: ${colors.red};
 `;
 
+export const MainTitle = styled.Text`
+  color: ${colors.darkPrimary};
+  font-size: 22px;
+  font-family: ${fonts.rubikRegular};
+  margin-bottom: 15px;
+`;
+
 export const CategoryContainer = styled.View`
   width: 100%;
   align-items: flex-start;
@@ -123,16 +130,18 @@ export const CategoryContainer = styled.View`
   padding: 0 5%;
 `;
 
-export const CategoryTitle = styled.Text`
-  color: ${colors.darkPrimary};
-  font-size: 22px;
-  font-family: ${fonts.rubikRegular};
-  margin-bottom: 15px;
-`;
-
 export const Categories = styled.View`
   width: 100%;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+`;
+
+export const ListContainer = styled.View`
+  width: 100%;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding: 0 5%;
 `;
