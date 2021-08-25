@@ -3,12 +3,17 @@ import { theme } from "../../../../theme";
 
 const { colors, fonts } = theme.default;
 
-export const Container = styled.View`
+interface ContainerProps {
+  last?: boolean;
+}
+
+export const Container = styled.View<ContainerProps>`
   width: 100%;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   padding: 10px 0;
+  padding-bottom: ${(props) => (props.last ? "110px" : "10px")};
 `;
 
 export const DataContainer = styled.View`

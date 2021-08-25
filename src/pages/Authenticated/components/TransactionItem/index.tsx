@@ -1,5 +1,7 @@
 import React from "react";
-import { TransactionItemProps } from "../TransactionsList";
+import { Fontisto } from "@expo/vector-icons";
+import { theme } from "../../../../theme";
+import { TransactionItemProps } from "../../Transactions/components/TransactionsList";
 import CategoryIcon from "./components/CategoryIcon";
 import {
   Container,
@@ -14,11 +16,12 @@ import {
 
 interface ItemProps {
   item: Omit<TransactionItemProps, "id">;
+  last?: boolean;
 }
 
-export default function TransactionItem({ item }: ItemProps) {
+export default function TransactionItem({ item, last }: ItemProps) {
   return (
-    <Container>
+    <Container last={last}>
       <DataContainer>
         <CategoryIcon category={item.category} />
         <DataTexts>
@@ -31,7 +34,14 @@ export default function TransactionItem({ item }: ItemProps) {
         <ValueTextGreen>+ R$ {item.value}</ValueTextGreen>
       )}
       {item.category === "Empréstimos" && (
-        <ValueTextBlue>R$ {item.value}</ValueTextBlue>
+        <ValueTextBlue>
+          <Fontisto
+            name="arrow-swap"
+            color={theme.default.colors.lightPrimary}
+            size={13}
+          />{" "}
+          R$ {item.value}
+        </ValueTextBlue>
       )}
       {item.category === "Gastos" && (
         <ValueTextRed>- R$ {item.value}</ValueTextRed>
