@@ -19,14 +19,14 @@ export default function TransactionsRoutes() {
       />
       <Stack.Screen
         name="TransactionValue"
-        component={TransactionInfo}
+        component={TransactionValue}
         options={{
           header: () => <Header pageName="Adicionar Transação" />,
         }}
       />
       <Stack.Screen
         name="TransactionInfo"
-        component={TransactionValue}
+        component={TransactionInfo}
         options={{
           header: () => <Header pageName="Adicionar Transação" />,
         }}
