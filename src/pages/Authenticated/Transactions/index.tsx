@@ -16,12 +16,145 @@ import {
 } from "./styles";
 import { theme } from "../../../theme";
 import { useNavigation } from "@react-navigation/native";
-import { Keyboard } from "react-native";
+import TransactionList, {
+  TransactionListProps,
+} from "./components/TransactionsList";
 
 export default function Transactions() {
   const [filterVisible, setFilterVisible] = useState(false);
 
   const navigation = useNavigation();
+
+  const { items }: TransactionListProps = {
+    items: [
+      {
+        id: "1",
+        description: "Brayan Burguer",
+        billingWay: "Nubank",
+        category: "Gastos",
+        value: 100,
+      },
+      {
+        id: "2",
+        description: "Para o agiota",
+        billingWay: "Nubank",
+        category: "Empréstimos",
+        value: 200,
+      },
+      {
+        id: "3",
+        description: "Aro Aro Salari",
+        billingWay: "Nubank",
+        category: "Recebidos",
+        value: 300,
+      },
+      {
+        id: "4",
+        description: "Brayan Burguer",
+        billingWay: "Nubank",
+        category: "Gastos",
+        value: 100,
+      },
+      {
+        id: "5",
+        description: "Para o agiota",
+        billingWay: "Nubank",
+        category: "Empréstimos",
+        value: 200,
+      },
+      {
+        id: "6",
+        description: "Aro Aro Salari",
+        billingWay: "Nubank",
+        category: "Recebidos",
+        value: 300,
+      },
+      {
+        id: "7",
+        description: "Brayan Burguer",
+        billingWay: "Nubank",
+        category: "Gastos",
+        value: 100,
+      },
+      {
+        id: "8",
+        description: "Para o agiota",
+        billingWay: "Nubank",
+        category: "Empréstimos",
+        value: 200,
+      },
+      {
+        id: "9",
+        description: "Aro Aro Salari",
+        billingWay: "Nubank",
+        category: "Recebidos",
+        value: 300,
+      },
+      {
+        id: "10",
+        description: "Brayan Burguer",
+        billingWay: "Nubank",
+        category: "Gastos",
+        value: 100,
+      },
+      {
+        id: "11",
+        description: "Para o agiota",
+        billingWay: "Nubank",
+        category: "Empréstimos",
+        value: 200,
+      },
+      {
+        id: "12",
+        description: "Aro Aro Salari",
+        billingWay: "Nubank",
+        category: "Recebidos",
+        value: 300,
+      },
+      {
+        id: "13",
+        description: "Brayan Burguer",
+        billingWay: "Nubank",
+        category: "Gastos",
+        value: 100,
+      },
+      {
+        id: "14",
+        description: "Para o agiota",
+        billingWay: "Nubank",
+        category: "Empréstimos",
+        value: 200,
+      },
+      {
+        id: "15",
+        description: "Aro Aro Salari",
+        billingWay: "Nubank",
+        category: "Recebidos",
+        value: 300,
+      },
+      {
+        id: "16",
+        description: "Brayan Burguer",
+        billingWay: "Nubank",
+        category: "Gastos",
+        value: 100,
+      },
+      {
+        id: "17",
+        description: "Para o agiota",
+        billingWay: "Nubank",
+        category: "Empréstimos",
+        value: 200,
+      },
+      {
+        id: "18",
+        description: "Aro Aro Salari",
+        billingWay: "Nubank",
+        category: "Recebidos",
+        value: 300,
+      },
+    ],
+  };
 
   return (
     <>
@@ -85,6 +218,7 @@ export default function Transactions() {
         </FilterIconContainer>
       )}
       <Container>
+        <TransactionList items={items} />
         <AddButton onPress={() => navigation.navigate("TransactionValue")}>
           <Entypo name="plus" size={40} color={theme.default.colors.white} />
         </AddButton>

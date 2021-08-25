@@ -12,7 +12,7 @@ export interface TransactionItemProps {
   value: number;
 }
 
-interface TransactionListProps {
+export interface TransactionListProps {
   items: Array<TransactionItemProps>;
 }
 
@@ -22,8 +22,14 @@ export default function TransactionList({ items }: TransactionListProps) {
       <FlatList
         data={items}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }: ListRenderItemInfo<TransactionItemProps>) => (
-          <TransactionItem item={item} />
+        renderItem={({
+          item,
+          index,
+        }: ListRenderItemInfo<TransactionItemProps>) => (
+          <TransactionItem
+            item={item}
+            last={items.length - 1 === index ? true : false}
+          />
         )}
         showsVerticalScrollIndicator={false}
       />
