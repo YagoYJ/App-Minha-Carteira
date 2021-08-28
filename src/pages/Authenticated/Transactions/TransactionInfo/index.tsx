@@ -1,7 +1,5 @@
 import { useRoute } from "@react-navigation/native";
 import React, { useState } from "react";
-import { KeyboardAvoidingView, Platform, Text } from "react-native";
-import ModalDropdown from "react-native-modal-dropdown";
 import { MaterialIcons } from "@expo/vector-icons";
 import CalendarPicker from "react-native-calendar-picker";
 
@@ -17,6 +15,7 @@ import {
   Label,
 } from "./styles";
 import { useEffect } from "react";
+import TypeSelect from "../components/TypeSelect";
 
 interface RouteParamsProps {
   key: string;
@@ -68,7 +67,8 @@ export default function TransactionInfo() {
         </InputContainer>
         <InputContainer>
           <Label>Tipo</Label>
-          <ModalDropdown
+          <TypeSelect type={type} onSelect={setType} defaultValue="Selecione" />
+          {/* <ModalDropdown
             options={["Selecione", "Recebido", "Gasto", "Transferência"]}
             onSelect={setType}
             defaultValue={!type ? "Selecione" : "Selecione"}
@@ -102,7 +102,7 @@ export default function TransactionInfo() {
               fontSize: 17,
               fontFamily: theme.default.fonts.rubikRegular,
             }}
-          />
+          /> */}
         </InputContainer>
         <InputContainer>
           <Label>Forma de pagamento</Label>
