@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\yagoj\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @types/react-native-mask-input
+  C:\Program Files\nodejs\node.exe C:\Users\yagoj\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @types/react-native-date-picker
 
 PATH: 
   C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\Program Files\dotnet\;C:\Program Files\OpenJDK\openjdk-8u275-b01\bin;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\nodejs\;C:\Users\yagoj\AppData\Local\Microsoft\WindowsApps;;C:\Users\yagoj\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\yagoj\AppData\Roaming\npm
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2freact-native-mask-input: Not found
+  Error: https://registry.yarnpkg.com/@types%2freact-native-date-picker: Not found
       at Request.params.callback [as _callback] (C:\Users\yagoj\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66988:18)
       at Request.self.callback (C:\Users\yagoj\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140662:22)
       at Request.emit (events.js:400:28)
@@ -43,6 +43,7 @@ npm manifest:
       "@react-navigation/bottom-tabs": "^5.x",
       "@react-navigation/native": "^5.x",
       "@react-navigation/stack": "^5.x",
+      "@types/react-native-modal-dropdown": "^0.7.1",
       "expo": "~42.0.1",
       "expo-app-loading": "^1.1.2",
       "expo-font": "~9.2.1",
@@ -52,8 +53,10 @@ npm manifest:
       "react": "16.13.1",
       "react-dom": "16.13.1",
       "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+      "react-native-date-picker": "^3.4.2",
       "react-native-gesture-handler": "~1.10.2",
       "react-native-mask-input": "^1.0.3",
+      "react-native-modal-dropdown": "^1.0.1",
       "react-native-reanimated": "~2.2.0",
       "react-native-safe-area-context": "3.2.0",
       "react-native-screens": "~3.4.0",
@@ -1773,6 +1776,14 @@ Lockfile:
     version "15.7.4"
     resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.4.tgz#fcf7205c25dff795ee79af1e30da2c9790808f11"
     integrity sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==
+  
+  "@types/react-native-modal-dropdown@^0.7.1":
+    version "0.7.1"
+    resolved "https://registry.yarnpkg.com/@types/react-native-modal-dropdown/-/react-native-modal-dropdown-0.7.1.tgz#5dd2b218e7d2b3a033af68e73411fef57f0c597c"
+    integrity sha512-2fN192/Vu224senlQGqdn5k3sH2jzCHdDLhBa1FQyoXhid80POVdKDgzlOhPJ/CjirAMq7Wqh0OCL4tTw70IvQ==
+    dependencies:
+      "@types/react" "*"
+      "@types/react-native" "*"
   
   "@types/react-native@*":
     version "0.64.13"
@@ -5161,6 +5172,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
     integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
   
+  react-native-date-picker@^3.4.2:
+    version "3.4.2"
+    resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-3.4.2.tgz#191f810e66b3458521268320bdd8682c29f3e90b"
+    integrity sha512-OMDrrYc7foM6oo0OyrTdEHBY4JaIto7gn6FVzyQvyVsrzPK1r43H7c9ndfDlMdA3NoJtKms1REGUi5Gi3o3wlA==
+  
   react-native-gesture-handler@~1.10.2:
     version "1.10.3"
     resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.10.3.tgz#942bbf2963bbf49fa79593600ee9d7b5dab3cfc0"
@@ -5181,6 +5197,13 @@ Lockfile:
     version "1.0.3"
     resolved "https://registry.yarnpkg.com/react-native-mask-input/-/react-native-mask-input-1.0.3.tgz#e490796e1af8c53074d5807b9de1d91bcff97e10"
     integrity sha512-Ve0bllu7AJVnUr+PeJLzr5MDxtfpR3XqS/+pzH5f6C7LpPwmeFf4v0oNfSp26Q3WjReKImiWUVo1xKnc4KG0Qg==
+  
+  react-native-modal-dropdown@^1.0.1:
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/react-native-modal-dropdown/-/react-native-modal-dropdown-1.0.1.tgz#24a9396dcb5dadf92feea1deae1089bcef054b20"
+    integrity sha512-7QAuKvdsIMvz5N2FnRGrZKb+JR3bYFFelONdmfwp1UW3acOyrhF32H06aMD09x2PdBz3VaR5+3iApt9FYClktQ==
+    dependencies:
+      prop-types "^15.6.0"
   
   react-native-reanimated@~2.2.0:
     version "2.2.0"
