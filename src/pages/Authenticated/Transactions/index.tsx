@@ -19,9 +19,11 @@ import { useNavigation } from "@react-navigation/native";
 import TransactionList, {
   TransactionListProps,
 } from "./components/TransactionsList";
+import TypeSelect from "./components/TypeSelect";
 
 export default function Transactions() {
   const [filterVisible, setFilterVisible] = useState(false);
+  const [typeFilter, setTypeFilter] = useState("");
 
   const navigation = useNavigation();
 
@@ -161,9 +163,10 @@ export default function Transactions() {
       {filterVisible ? (
         <FilterContainer>
           <Filter>
-            <Input
-              placeholder="Tipo de Transação"
-              placeholderTextColor={theme.default.colors.gray}
+            <TypeSelect
+              type={typeFilter}
+              onSelect={setTypeFilter}
+              defaultValue="Tipo da Transação"
             />
             <RowInputs>
               <RowInput>

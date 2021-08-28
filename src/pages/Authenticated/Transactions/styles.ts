@@ -18,14 +18,14 @@ export const Filter = styled.View`
 
 export const Input = styled.TextInput`
   width: 100%;
-  height: 40px;
-  padding: 10px;
-  background-color: ${colors.white};
+  padding: 15px;
+  background-color: #ffffff;
   border-width: 1px;
-  border-color: ${colors.gray};
-  border-radius: 5px;
-  font-size: 18px;
-  font-family: ${fonts.rubikLight};
+  border-color: #d5dce4;
+  border-radius: 8px;
+  font-size: 17px;
+  font-family: ${fonts.rubikRegular};
+  color: ${colors.primary}
 `;
 
 export const RowInputs = styled.View`
