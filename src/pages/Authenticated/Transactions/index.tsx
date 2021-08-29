@@ -1,29 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import { Entypo, FontAwesome5, FontAwesome } from "@expo/vector-icons";
+import Modal from "react-native-modal";
+import { format } from "date-fns";
+
+import TypeSelect from "./components/TypeSelect";
+import TransactionList, {
+  TransactionListProps,
+} from "./components/TransactionsList";
 
 import {
   AddButton,
+  ModalContent,
+  CalendarToggle,
+  CalendarTogglePlaceholder,
   Container,
   Filter,
   FilterButton,
   FilterButtons,
   FilterContainer,
   FilterIconContainer,
-  Input,
   Label,
   RowInput,
   RowInputs,
+  ButtonContainer,
+  ModalTitle,
+  CalendarToggleText,
 } from "./styles";
+
+import Calendar from "./components/Calendar";
+import SubmitButton from "./components/SubmitButton";
+
 import { theme } from "../../../theme";
-import { useNavigation } from "@react-navigation/native";
-import TransactionList, {
-  TransactionListProps,
-} from "./components/TransactionsList";
-import TypeSelect from "./components/TypeSelect";
+interface DateInputProps {
+  day: number;
+  month: number;
+  year: number;
+}
 
 export default function Transactions() {
+  const [calendarVisible, setCalendarVisible] = useState(false);
   const [filterVisible, setFilterVisible] = useState(false);
   const [typeFilter, setTypeFilter] = useState("");
+  const [dateRange, setDateRange] = useState<DateInputProps[]>([]);
+  const [dateSelectedText, setDateSelectedText] = useState("");
 
   const navigation = useNavigation();
 
@@ -158,31 +178,90 @@ export default function Transactions() {
     ],
   };
 
+  function selectDates(date: DateInputProps) {
+    if (date) {
+      if (dateRange.length < 2) {
+        setDateRange([...dateRange, date]);
+      } else {
+        setDateRange([date]);
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (dateRange.length === 2) {
+      let date1 = format(
+        new Date(dateRange[0].year, dateRange[0].month, dateRange[0].day),
+        "dd/MM"
+      );
+      let date2 = format(
+        new Date(dateRange[1].year, dateRange[1].month, dateRange[1].day),
+        "dd/MM"
+      );
+      setDateSelectedText(`${date1} até ${date2}`);
+    }
+  }, [dateRange]);
+
   return (
     <>
       {filterVisible ? (
         <FilterContainer>
           <Filter>
-            <TypeSelect
-              type={typeFilter}
-              onSelect={setTypeFilter}
-              defaultValue="Tipo da Transação"
-            />
             <RowInputs>
               <RowInput>
-                <Label>De</Label>
-                <Input
-                  placeholder="Data"
-                  placeholderTextColor={theme.default.colors.gray}
+                <Label>Tipo da Transação</Label>
+                <TypeSelect
+                  type={typeFilter}
+                  onSelect={setTypeFilter}
+                  defaultValue="Selecione"
                 />
               </RowInput>
 
               <RowInput>
-                <Label>Até</Label>
-                <Input
-                  placeholder="Data"
-                  placeholderTextColor={theme.default.colors.gray}
-                />
+                <Label>Período</Label>
+                <CalendarToggle
+                  onPress={() => {
+                    setCalendarVisible(true);
+                    setDateRange([]);
+                  }}
+                >
+                  {dateRange.length === 2 ? (
+                    <CalendarToggleText>{dateSelectedText}</CalendarToggleText>
+                  ) : (
+                    <CalendarTogglePlaceholder>Data</CalendarTogglePlaceholder>
+                  )}
+
+                  <Modal
+                    isVisible={calendarVisible}
+                    onBackdropPress={() => {
+                      setCalendarVisible(false);
+                      setDateRange([]);
+                    }}
+                    statusBarTranslucent
+                  >
+                    <ModalContent>
+                      <ModalTitle>Escolha os dias</ModalTitle>
+                      <Calendar
+                        allowRangeSelection
+                        width={385}
+                        onDateChange={(date) => {
+                          let dateFormatted = date?.creationData()
+                            ?.input as DateInputProps;
+
+                          selectDates(dateFormatted);
+                        }}
+                      />
+                      <ButtonContainer>
+                        <SubmitButton
+                          text="Escolher"
+                          onPress={() => setCalendarVisible(false)}
+                          disabled={dateRange.length < 2 ? true : false}
+                          style={{ opacity: dateRange.length < 2 ? 0.5 : 1 }}
+                        />
+                      </ButtonContainer>
+                    </ModalContent>
+                  </Modal>
+                </CalendarToggle>
               </RowInput>
             </RowInputs>
           </Filter>
