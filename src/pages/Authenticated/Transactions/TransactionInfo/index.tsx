@@ -1,7 +1,5 @@
 import { useRoute } from "@react-navigation/native";
 import React, { useState } from "react";
-import { MaterialIcons } from "@expo/vector-icons";
-import CalendarPicker from "react-native-calendar-picker";
 
 import SubmitButton from "../components/SubmitButton";
 
@@ -16,6 +14,7 @@ import {
 } from "./styles";
 import { useEffect } from "react";
 import TypeSelect from "../components/TypeSelect";
+import Calendar from "../components/Calendar";
 
 interface RouteParamsProps {
   key: string;
@@ -23,6 +22,13 @@ interface RouteParamsProps {
   params: {
     value: number;
   };
+}
+
+interface DateInputProps {
+  day: number;
+  month: number;
+  year: number;
+  hour: number;
 }
 
 export default function TransactionInfo() {
@@ -65,45 +71,12 @@ export default function TransactionInfo() {
             onChangeText={setDescription}
           />
         </InputContainer>
+
         <InputContainer>
           <Label>Tipo</Label>
           <TypeSelect type={type} onSelect={setType} defaultValue="Selecione" />
-          {/* <ModalDropdown
-            options={["Selecione", "Recebido", "Gasto", "Transferência"]}
-            onSelect={setType}
-            defaultValue={!type ? "Selecione" : "Selecione"}
-            style={{
-              width: "100%",
-              padding: 15,
-              borderWidth: 1,
-              borderColor: "#d5dce4",
-              borderRadius: 8,
-              backgroundColor: "#ffffff",
-            }}
-            dropdownTextHighlightStyle={{
-              color: type
-                ? theme.default.colors.primary
-                : theme.default.colors.gray,
-            }}
-            textStyle={{
-              fontSize: 17,
-              fontFamily: theme.default.fonts.rubikRegular,
-              color: type
-                ? theme.default.colors.primary
-                : theme.default.colors.gray,
-            }}
-            dropdownStyle={{
-              width: "90%",
-              borderRadius: 8,
-              marginLeft: -15,
-              marginTop: 15,
-            }}
-            dropdownTextStyle={{
-              fontSize: 17,
-              fontFamily: theme.default.fonts.rubikRegular,
-            }}
-          /> */}
         </InputContainer>
+
         <InputContainer>
           <Label>Forma de pagamento</Label>
           <Input
@@ -113,71 +86,25 @@ export default function TransactionInfo() {
             onChangeText={setPayment}
           />
         </InputContainer>
+
         <InputContainer>
           <Label>Data</Label>
           <CalendarContainer>
-            <CalendarPicker
-              headerWrapperStyle={{
-                alignItems: "center",
-                justifyContent: "space-evenly",
+            <Calendar
+              onDateChange={(date) => {
+                const input: DateInputProps = date.creationData()
+                  .input as DateInputProps;
+
+                setDate(new Date(input.year, input.month, input.day));
               }}
-              selectedDayColor={theme.default.colors.lightPrimary}
-              selectedDayTextColor={theme.default.colors.white}
-              weekdays={["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"]}
-              selectMonthTitle="Selecione o mês de "
-              monthTitleStyle={{
-                color: theme.default.colors.primary,
-              }}
-              months={[
-                "Janeiro",
-                "Fevereiro",
-                "Março",
-                "Abril",
-                "Maio",
-                "Junho",
-                "Julho",
-                "Agosto",
-                "Setembro",
-                "Outubro",
-                "Novembro",
-                "Dezembro",
-              ]}
-              selectYearTitle="Selecione o ano"
-              yearTitleStyle={{
-                color: theme.default.colors.primary,
-              }}
-              maxDate={new Date(Date.now())}
-              nextComponent={
-                <MaterialIcons
-                  name="keyboard-arrow-right"
-                  size={30}
-                  color={theme.default.colors.primary}
-                />
-              }
-              previousComponent={
-                <MaterialIcons
-                  name="keyboard-arrow-left"
-                  size={30}
-                  color={theme.default.colors.primary}
-                />
-              }
-              onDateChange={(date) =>
-                setDate(
-                  new Date(
-                    date.creationData().input?.year,
-                    date.creationData().input?.month,
-                    date.creationData().input?.day
-                  )
-                )
-              }
             />
           </CalendarContainer>
         </InputContainer>
+
         <SubmitButton
           text="Cadastrar"
           onPress={handleSubmit}
           disabled={buttonDisable}
-          // disabled={!description && !type && !payment && !date ? true : false}
           style={{ opacity: buttonDisable ? 0.5 : 1 }}
         />
       </Form>

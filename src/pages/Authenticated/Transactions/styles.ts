@@ -16,16 +16,11 @@ export const Filter = styled.View`
   padding: 20px;
 `;
 
-export const Input = styled.TextInput`
-  width: 100%;
-  padding: 15px;
-  background-color: #ffffff;
-  border-width: 1px;
-  border-color: #d5dce4;
-  border-radius: 8px;
-  font-size: 17px;
+export const Label = styled.Text`
   font-family: ${fonts.rubikRegular};
-  color: ${colors.primary}
+  color: ${colors.white};
+  font-size: 15px;
+  margin-bottom: 10px;
 `;
 
 export const RowInputs = styled.View`
@@ -42,11 +37,43 @@ export const RowInput = styled.View`
   justify-content: space-between;
 `;
 
-export const Label = styled.Text`
+export const CalendarToggle = styled.TouchableOpacity`
+  width: 100%;
+  padding: 15px;
+  background-color: #ffffff;
+  border-width: 1px;
+  border-color: #d5dce4;
+  border-radius: 8px;
+`;
+
+export const CalendarTogglePlaceholder = styled.Text`
+  font-size: 17px;
   font-family: ${fonts.rubikRegular};
-  color: ${colors.white};
-  font-size: 15px;
-  margin-bottom: 10px;
+  color: ${colors.gray};
+`;
+
+export const CalendarToggleText = styled.Text`
+  font-size: 17px;
+  font-family: ${fonts.rubikRegular};
+  color: ${colors.primary};
+`;
+
+export const ModalContent = styled.View`
+  border-radius: 8px;
+  padding: 20px;
+  background-color: ${colors.white};
+`;
+
+export const ModalTitle = styled.Text`
+  color: ${colors.primary};
+  text-align: center;
+  font-family: ${fonts.rubikBold};
+  font-size: 23px;
+  margin-bottom: 30px;
+`;
+
+export const ButtonContainer = styled.View`
+  margin-top: 30px;
 `;
 
 export const FilterButtons = styled.View`
