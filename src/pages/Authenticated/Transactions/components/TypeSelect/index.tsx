@@ -1,4 +1,5 @@
 import React from "react";
+import { Platform } from "react-native";
 import ModalDropdown, { ModalDropdownProps } from "react-native-modal-dropdown";
 import { theme } from "../../../../../theme";
 
@@ -31,7 +32,7 @@ export default function TypeSelect({ type, ...rest }: TypeSelectProps) {
         width: "90%",
         borderRadius: 8,
         marginLeft: -15,
-        marginTop: 15,
+        marginTop: Platform.OS === "ios" ? 15 : -15,
       }}
       dropdownTextStyle={{
         fontSize: 17,

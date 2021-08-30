@@ -60,7 +60,7 @@ export default function Home() {
           </TitleTexts>
         </TopHeader>
 
-        <Card>
+        <Card style={{ elevation: 8 }}>
           <Values>
             <Value>
               <ValueTitleGreen>Entradas</ValueTitleGreen>
