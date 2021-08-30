@@ -49,7 +49,6 @@ export const Card = styled.View`
   padding: 25px 15px;
   background-color: ${colors.white};
   box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.25);
-  elevation: 7;
   border-radius: 10px;
   margin-top: -70px;
 `;
