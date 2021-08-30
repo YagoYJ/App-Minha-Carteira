@@ -202,6 +202,13 @@ export default function Transactions() {
     }
   }, [dateRange]);
 
+  useEffect(() => {
+    if (!filterVisible) {
+      setTypeFilter("");
+      setDateRange([]);
+    }
+  }, [filterVisible]);
+
   return (
     <>
       {filterVisible ? (
