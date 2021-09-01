@@ -4,16 +4,24 @@ import { FlatList } from "react-native-gesture-handler";
 import TransactionItem from "../../../components/TransactionItem";
 import { Container } from "./styles";
 
-export interface TransactionItemProps {
-  id: string;
+export interface TransactionItemPropsData {
   description: string;
   category: string;
   billingWay: string;
   value: number;
+  date: {
+    nanoseconds: number;
+    seconds: number;
+  };
+}
+
+export interface TransactionItemProps {
+  id: string;
+  data: TransactionItemPropsData;
 }
 
 export interface TransactionListProps {
-  items: Array<TransactionItemProps>;
+  items: Array<TransactionItemPropsData>;
 }
 
 export default function TransactionList({ items }: TransactionListProps) {

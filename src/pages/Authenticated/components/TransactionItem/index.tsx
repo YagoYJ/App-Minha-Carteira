@@ -1,7 +1,7 @@
 import React from "react";
 import { Fontisto } from "@expo/vector-icons";
 import { theme } from "../../../../theme";
-import { TransactionItemProps } from "../../Transactions/components/TransactionsList";
+import { TransactionItemPropsData } from "../../Transactions/components/TransactionsList";
 import CategoryIcon from "./components/CategoryIcon";
 import {
   Container,
@@ -15,7 +15,7 @@ import {
 } from "./styles";
 
 interface ItemProps {
-  item: Omit<TransactionItemProps, "id">;
+  item: TransactionItemPropsData;
   last?: boolean;
 }
 
@@ -30,10 +30,10 @@ export default function TransactionItem({ item, last }: ItemProps) {
         </DataTexts>
       </DataContainer>
 
-      {item.category === "Recebidos" && (
+      {item.category === "Recebido" && (
         <ValueTextGreen>+ R$ {item.value}</ValueTextGreen>
       )}
-      {item.category === "Empréstimos" && (
+      {item.category === "Empréstimo" && (
         <ValueTextBlue>
           <Fontisto
             name="arrow-swap"
@@ -43,7 +43,7 @@ export default function TransactionItem({ item, last }: ItemProps) {
           R$ {item.value}
         </ValueTextBlue>
       )}
-      {item.category === "Gastos" && (
+      {item.category === "Gasto" && (
         <ValueTextRed>- R$ {item.value}</ValueTextRed>
       )}
     </Container>

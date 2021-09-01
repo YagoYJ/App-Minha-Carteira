@@ -11,7 +11,7 @@ interface CategoryCardProps {
 export default function CategoryIcon({ category }: CategoryCardProps) {
   return (
     <>
-      {category === "Gastos" && (
+      {category === "Gasto" && (
         <Container style={{ backgroundColor: theme.default.colors.red }}>
           <Feather
             name="alert-circle"
@@ -20,7 +20,7 @@ export default function CategoryIcon({ category }: CategoryCardProps) {
           />
         </Container>
       )}
-      {category === "Empréstimos" && (
+      {category === "Empréstimo" && (
         <Container
           style={{ backgroundColor: theme.default.colors.lightPrimary }}
         >
@@ -31,7 +31,7 @@ export default function CategoryIcon({ category }: CategoryCardProps) {
           />
         </Container>
       )}
-      {category === "Recebidos" && (
+      {category === "Recebido" && (
         <Container style={{ backgroundColor: theme.default.colors.green }}>
           <FontAwesome5
             name="hand-holding-usd"
