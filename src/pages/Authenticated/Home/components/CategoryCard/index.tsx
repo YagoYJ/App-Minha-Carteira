@@ -11,7 +11,7 @@ interface CategoryCardProps {
 export default function CategoryCard({ label }: CategoryCardProps) {
   return (
     <>
-      {label === "Gastos" && (
+      {label === "Gasto" && (
         <Container style={{ backgroundColor: theme.default.colors.red }}>
           <Feather
             name="alert-circle"
@@ -21,8 +21,10 @@ export default function CategoryCard({ label }: CategoryCardProps) {
           <Label>{label}</Label>
         </Container>
       )}
-      {label === "Empréstimos" && (
-        <Container style={{ backgroundColor: theme.default.colors.lightPrimary }}>
+      {label === "Empréstimo" && (
+        <Container
+          style={{ backgroundColor: theme.default.colors.lightPrimary }}
+        >
           <Fontisto
             name="arrow-swap"
             color={theme.default.colors.white}
@@ -31,7 +33,7 @@ export default function CategoryCard({ label }: CategoryCardProps) {
           <Label>{label}</Label>
         </Container>
       )}
-      {label === "Recebidos" && (
+      {label === "Recebido" && (
         <Container style={{ backgroundColor: theme.default.colors.green }}>
           <FontAwesome5
             name="hand-holding-usd"

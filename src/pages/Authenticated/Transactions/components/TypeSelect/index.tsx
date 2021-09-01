@@ -11,7 +11,7 @@ export default function TypeSelect({ type, ...rest }: TypeSelectProps) {
   return (
     <ModalDropdown
       {...rest}
-      options={["Selecione", "Recebido", "Gasto", "Transferência"]}
+      options={["Selecione", "Recebido", "Gasto", "Empréstimo"]}
       style={{
         width: "100%",
         padding: 15,

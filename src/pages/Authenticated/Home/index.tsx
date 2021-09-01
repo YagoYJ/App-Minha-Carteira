@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TransactionItem from "../components/TransactionItem";
-import { TransactionItemProps } from "../Transactions/components/TransactionsList";
+import {
+  TransactionItemProps,
+  TransactionItemPropsData,
+} from "../Transactions/components/TransactionsList";
+import firebase from "../../../configs/firebase";
 
 import CategoryCard from "./components/CategoryCard";
 import {
@@ -25,31 +29,25 @@ import {
   ListContainer,
 } from "./styles";
 
-const items = [
-  {
-    id: "1",
-    description: "Brayan Burguer",
-    billingWay: "Nubank",
-    category: "Gastos",
-    value: 100,
-  },
-  {
-    id: "2",
-    description: "Para o agiota",
-    billingWay: "Nubank",
-    category: "Empréstimos",
-    value: 200,
-  },
-  {
-    id: "3",
-    description: "Aro Aro Salari",
-    billingWay: "Nubank",
-    category: "Recebidos",
-    value: 300,
-  },
-];
-
 export default function Home() {
+  const [transactions, setTransactions] = useState<TransactionItemProps[]>([]);
+  useEffect(() => {
+    firebase
+      .firestore()
+      .collection("transactions")
+      .onSnapshot((query) => {
+        var list: TransactionItemProps[] = [];
+        query.forEach((doc) => {
+          list.push({
+            data: doc.data() as TransactionItemPropsData,
+            id: doc.id,
+          });
+        });
+
+        setTransactions(list);
+      });
+  }, []);
+
   return (
     <Container showsVerticalScrollIndicator={false}>
       <Header>
@@ -83,17 +81,17 @@ export default function Home() {
       <CategoryContainer>
         <MainTitle>Categorias</MainTitle>
         <Categories>
-          <CategoryCard label="Gastos" />
-          <CategoryCard label="Empréstimos" />
-          <CategoryCard label="Recebidos" />
+          <CategoryCard label="Gasto" />
+          <CategoryCard label="Empréstimo" />
+          <CategoryCard label="Recebido" />
         </Categories>
       </CategoryContainer>
 
       <ListContainer>
         <MainTitle>Últimas Trasações</MainTitle>
 
-        {items.map((item: TransactionItemProps) => (
-          <TransactionItem item={item} key={item.id} />
+        {transactions.map((item: TransactionItemProps) => (
+          <TransactionItem item={item.data} key={item.id} />
         ))}
       </ListContainer>
     </Container>
