@@ -81,9 +81,9 @@ export default function Home() {
       <CategoryContainer>
         <MainTitle>Categorias</MainTitle>
         <Categories>
-          <CategoryCard label="Gastos" />
-          <CategoryCard label="Empréstimos" />
-          <CategoryCard label="Recebidos" />
+          <CategoryCard label="Gasto" />
+          <CategoryCard label="Empréstimo" />
+          <CategoryCard label="Recebido" />
         </Categories>
       </CategoryContainer>
 
