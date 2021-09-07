@@ -201,6 +201,13 @@ export default function Transactions() {
           data={transactions}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => <TransactionItem item={item} />}
+          ListFooterComponent={() => (
+            <View
+              style={{
+                height: transactions.length > 6 ? 100 : 0,
+              }}
+            />
+          )}
         />
       </ListContainer>
 
