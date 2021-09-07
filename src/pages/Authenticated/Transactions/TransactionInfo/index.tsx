@@ -1,4 +1,4 @@
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useState } from "react";
 
 import SubmitButton from "../components/SubmitButton";
@@ -16,6 +16,7 @@ import { useEffect } from "react";
 import TypeSelect from "../components/TypeSelect";
 import Calendar from "../components/Calendar";
 import { DateInputProps } from "../../types/transactions";
+import firebase from "../../../../configs/firebase";
 
 interface RouteParamsProps {
   key: string;
@@ -33,15 +34,22 @@ export default function TransactionInfo() {
   const [buttonDisable, setButtonDisable] = useState(true);
 
   const { params } = useRoute<RouteParamsProps>();
+  const navigation = useNavigation();
+
+  const types = ["Selecione", "Recebido", "Gasto", "Empréstimo"];
 
   function handleSubmit() {
     const payload = {
       ...params,
       description,
-      type,
+      type: types[Number(type)],
       payment,
       date,
     };
+
+    firebase.firestore().collection("transactions").add(payload);
+
+    return navigation.navigate("Transactions");
   }
 
   useEffect(() => {
