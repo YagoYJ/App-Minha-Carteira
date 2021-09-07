@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
 import TransactionItem from "../components/TransactionItem";
-import {
-  TransactionItemProps,
-  TransactionItemPropsData,
-} from "../Transactions/components/TransactionsList";
 import firebase from "../../../configs/firebase";
 
-import CategoryCard from "./components/CategoryCard";
+import TypeCard from "./components/TypeCard";
 import {
   Card,
   Categories,
@@ -28,18 +24,19 @@ import {
   ValueTitleRed,
   ListContainer,
 } from "./styles";
+import { Transaction, TransactionData } from "../types/transactions";
 
 export default function Home() {
-  const [transactions, setTransactions] = useState<TransactionItemProps[]>([]);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
   useEffect(() => {
     firebase
       .firestore()
       .collection("transactions")
       .onSnapshot((query) => {
-        var list: TransactionItemProps[] = [];
+        var list: Transaction[] = [];
         query.forEach((doc) => {
           list.push({
-            data: doc.data() as TransactionItemPropsData,
+            data: doc.data() as TransactionData,
             id: doc.id,
           });
         });
@@ -81,17 +78,17 @@ export default function Home() {
       <CategoryContainer>
         <MainTitle>Categorias</MainTitle>
         <Categories>
-          <CategoryCard label="Gasto" />
-          <CategoryCard label="Empréstimo" />
-          <CategoryCard label="Recebido" />
+          <TypeCard label="Gasto" />
+          <TypeCard label="Empréstimo" />
+          <TypeCard label="Recebido" />
         </Categories>
       </CategoryContainer>
 
       <ListContainer>
         <MainTitle>Últimas Trasações</MainTitle>
 
-        {transactions.map((item: TransactionItemProps) => (
-          <TransactionItem item={item.data} key={item.id} />
+        {transactions.map((item: Transaction) => (
+          <TransactionItem item={item} key={item.id} />
         ))}
       </ListContainer>
     </Container>

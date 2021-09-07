@@ -4,14 +4,14 @@ import { Feather, Fontisto, FontAwesome5 } from "@expo/vector-icons";
 import { Container } from "./styles";
 import { theme } from "../../../../../../theme";
 
-interface CategoryCardProps {
-  category: string;
+interface TypeCardProps {
+  type: string;
 }
 
-export default function CategoryIcon({ category }: CategoryCardProps) {
+export default function TypeIcon({ type }: TypeCardProps) {
   return (
     <>
-      {category === "Gasto" && (
+      {type === "Gasto" && (
         <Container style={{ backgroundColor: theme.default.colors.red }}>
           <Feather
             name="alert-circle"
@@ -20,7 +20,7 @@ export default function CategoryIcon({ category }: CategoryCardProps) {
           />
         </Container>
       )}
-      {category === "Empréstimo" && (
+      {type === "Empréstimo" && (
         <Container
           style={{ backgroundColor: theme.default.colors.lightPrimary }}
         >
@@ -31,7 +31,7 @@ export default function CategoryIcon({ category }: CategoryCardProps) {
           />
         </Container>
       )}
-      {category === "Recebido" && (
+      {type === "Recebido" && (
         <Container style={{ backgroundColor: theme.default.colors.green }}>
           <FontAwesome5
             name="hand-holding-usd"

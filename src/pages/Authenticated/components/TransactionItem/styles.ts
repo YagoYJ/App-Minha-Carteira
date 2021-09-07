@@ -29,7 +29,7 @@ export const DataTexts = styled.View`
   margin-left: 10px;
 `;
 
-export const DataCategory = styled.Text`
+export const DataType = styled.Text`
   font-family: ${fonts.rubikRegular};
   font-size: 15px;
   color: ${colors.darkPrimary};

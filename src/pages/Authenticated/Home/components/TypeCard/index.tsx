@@ -4,11 +4,11 @@ import { Feather, Fontisto, FontAwesome5 } from "@expo/vector-icons";
 import { Container, Label } from "./styles";
 import { theme } from "../../../../../theme";
 
-interface CategoryCardProps {
+interface TypeCardProps {
   label: string;
 }
 
-export default function CategoryCard({ label }: CategoryCardProps) {
+export default function TypeCard({ label }: TypeCardProps) {
   return (
     <>
       {label === "Gasto" && (
