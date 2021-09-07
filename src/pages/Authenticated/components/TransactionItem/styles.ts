@@ -35,7 +35,7 @@ export const DataType = styled.Text`
   color: ${colors.darkPrimary};
 `;
 
-export const DataBillingWay = styled.Text`
+export const DataPayment = styled.Text`
   font-family: ${fonts.rubikLight};
   font-size: 15px;
   color: ${colors.gray};

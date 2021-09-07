@@ -4,7 +4,7 @@ import { theme } from "../../../../theme";
 import TypeIcon from "./components/TypeIcon";
 import {
   Container,
-  DataBillingWay,
+  DataPayment,
   DataType,
   DataContainer,
   DataTexts,
@@ -25,7 +25,7 @@ export default function TransactionItem({ item }: TransactionItemProps) {
         <TypeIcon type={item.data.type} />
         <DataTexts>
           <DataType>{item.data.description}</DataType>
-          <DataBillingWay>{item.data.billingWay}</DataBillingWay>
+          <DataPayment>{item.data.payment}</DataPayment>
         </DataTexts>
       </DataContainer>
 

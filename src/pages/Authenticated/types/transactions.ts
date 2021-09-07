@@ -6,7 +6,7 @@ export type Transaction = {
 export type TransactionData = {
   description: string;
   type: string;
-  billingWay: string;
+  payment: string;
   value: number;
   date: {
     nanoseconds: number;
