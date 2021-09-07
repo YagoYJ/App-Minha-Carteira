@@ -15,6 +15,7 @@ import {
 import { useEffect } from "react";
 import TypeSelect from "../components/TypeSelect";
 import Calendar from "../components/Calendar";
+import { DateInputProps } from "../../types/transactions";
 
 interface RouteParamsProps {
   key: string;
@@ -22,13 +23,6 @@ interface RouteParamsProps {
   params: {
     value: number;
   };
-}
-
-interface DateInputProps {
-  day: number;
-  month: number;
-  year: number;
-  hour: number;
 }
 
 export default function TransactionInfo() {
@@ -48,7 +42,6 @@ export default function TransactionInfo() {
       payment,
       date,
     };
-    console.log(payload);
   }
 
   useEffect(() => {

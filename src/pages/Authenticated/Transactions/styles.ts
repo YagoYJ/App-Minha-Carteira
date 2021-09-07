@@ -104,6 +104,11 @@ export const FilterIconContainer = styled.View`
   padding: 20px 20px;
 `;
 
+export const ListContainer = styled.View`
+  padding: 0 20px;
+  height: 500px;
+`;
+
 export const AddButton = styled.TouchableOpacity`
   width: 77px;
   height: 77px;

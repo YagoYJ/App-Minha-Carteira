@@ -5,9 +5,6 @@ import Modal from "react-native-modal";
 import { format } from "date-fns";
 
 import TypeSelect from "./components/TypeSelect";
-import TransactionList, {
-  TransactionListProps,
-} from "./components/TransactionsList";
 
 import {
   AddButton,
@@ -26,17 +23,22 @@ import {
   ButtonContainer,
   ModalTitle,
   CalendarToggleText,
+  ListContainer,
 } from "./styles";
 
 import Calendar from "./components/Calendar";
 import SubmitButton from "./components/SubmitButton";
 
 import { theme } from "../../../theme";
-interface DateInputProps {
-  day: number;
-  month: number;
-  year: number;
-}
+import firebase from "../../../configs/firebase";
+import {
+  DateInputProps,
+  Transaction,
+  TransactionData,
+} from "../types/transactions";
+import { FlatList } from "react-native-gesture-handler";
+import TransactionItem from "../components/TransactionItem";
+import { Text, View } from "react-native";
 
 export default function Transactions() {
   const [calendarVisible, setCalendarVisible] = useState(false);
@@ -44,149 +46,26 @@ export default function Transactions() {
   const [typeFilter, setTypeFilter] = useState("");
   const [dateRange, setDateRange] = useState<DateInputProps[]>([]);
   const [dateSelectedText, setDateSelectedText] = useState("");
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   const navigation = useNavigation();
 
-  const { items }: TransactionListProps = {
-    items: [
-      {
-        id: "1",
-        description: "Brayan Burguer",
-        billingWay: "Nubank",
-        category: "Gastos",
-        value: 100,
-      },
-      {
-        id: "2",
-        description: "Para o agiota",
-        billingWay: "Nubank",
-        category: "Empréstimos",
-        value: 200,
-      },
-      {
-        id: "3",
-        description: "Aro Aro Salari",
-        billingWay: "Nubank",
-        category: "Recebidos",
-        value: 300,
-      },
-      {
-        id: "4",
-        description: "Brayan Burguer",
-        billingWay: "Nubank",
-        category: "Gastos",
-        value: 100,
-      },
-      {
-        id: "5",
-        description: "Para o agiota",
-        billingWay: "Nubank",
-        category: "Empréstimos",
-        value: 200,
-      },
-      {
-        id: "6",
-        description: "Aro Aro Salari",
-        billingWay: "Nubank",
-        category: "Recebidos",
-        value: 300,
-      },
-      {
-        id: "7",
-        description: "Brayan Burguer",
-        billingWay: "Nubank",
-        category: "Gastos",
-        value: 100,
-      },
-      {
-        id: "8",
-        description: "Para o agiota",
-        billingWay: "Nubank",
-        category: "Empréstimos",
-        value: 200,
-      },
-      {
-        id: "9",
-        description: "Aro Aro Salari",
-        billingWay: "Nubank",
-        category: "Recebidos",
-        value: 300,
-      },
-      {
-        id: "10",
-        description: "Brayan Burguer",
-        billingWay: "Nubank",
-        category: "Gastos",
-        value: 100,
-      },
-      {
-        id: "11",
-        description: "Para o agiota",
-        billingWay: "Nubank",
-        category: "Empréstimos",
-        value: 200,
-      },
-      {
-        id: "12",
-        description: "Aro Aro Salari",
-        billingWay: "Nubank",
-        category: "Recebidos",
-        value: 300,
-      },
-      {
-        id: "13",
-        description: "Brayan Burguer",
-        billingWay: "Nubank",
-        category: "Gastos",
-        value: 100,
-      },
-      {
-        id: "14",
-        description: "Para o agiota",
-        billingWay: "Nubank",
-        category: "Empréstimos",
-        value: 200,
-      },
-      {
-        id: "15",
-        description: "Aro Aro Salari",
-        billingWay: "Nubank",
-        category: "Recebidos",
-        value: 300,
-      },
-      {
-        id: "16",
-        description: "Brayan Burguer",
-        billingWay: "Nubank",
-        category: "Gastos",
-        value: 100,
-      },
-      {
-        id: "17",
-        description: "Para o agiota",
-        billingWay: "Nubank",
-        category: "Empréstimos",
-        value: 200,
-      },
-      {
-        id: "18",
-        description: "Aro Aro Salari",
-        billingWay: "Nubank",
-        category: "Recebidos",
-        value: 300,
-      },
-    ],
-  };
+  useEffect(() => {
+    firebase
+      .firestore()
+      .collection("transactions")
+      .onSnapshot((query) => {
+        var list: Transaction[] = [];
+        query.forEach((doc) => {
+          list.push({
+            data: doc.data() as TransactionData,
+            id: doc.id,
+          });
+        });
 
-  function selectDates(date: DateInputProps) {
-    if (date) {
-      if (dateRange.length < 2) {
-        setDateRange([...dateRange, date]);
-      } else {
-        setDateRange([date]);
-      }
-    }
-  }
+        setTransactions(list);
+      });
+  }, []);
 
   useEffect(() => {
     if (dateRange.length === 2) {
@@ -208,6 +87,16 @@ export default function Transactions() {
       setDateRange([]);
     }
   }, [filterVisible]);
+
+  function selectDates(date: DateInputProps) {
+    if (date) {
+      if (dateRange.length < 2) {
+        setDateRange([...dateRange, date]);
+      } else {
+        setDateRange([date]);
+      }
+    }
+  }
 
   return (
     <>
@@ -306,8 +195,16 @@ export default function Transactions() {
           />
         </FilterIconContainer>
       )}
+
+      <ListContainer>
+        <FlatList
+          data={transactions}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => <TransactionItem item={item} />}
+        />
+      </ListContainer>
+
       <Container>
-        <TransactionList items={items} />
         <AddButton onPress={() => navigation.navigate("TransactionValue")}>
           <Entypo name="plus" size={40} color={theme.default.colors.white} />
         </AddButton>

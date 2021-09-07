@@ -1,50 +1,49 @@
 import React from "react";
 import { Fontisto } from "@expo/vector-icons";
 import { theme } from "../../../../theme";
-import { TransactionItemPropsData } from "../../Transactions/components/TransactionsList";
-import CategoryIcon from "./components/CategoryIcon";
+import TypeIcon from "./components/TypeIcon";
 import {
   Container,
   DataBillingWay,
-  DataCategory,
+  DataType,
   DataContainer,
   DataTexts,
   ValueTextBlue,
   ValueTextGreen,
   ValueTextRed,
 } from "./styles";
+import { Transaction } from "../../types/transactions";
 
-interface ItemProps {
-  item: TransactionItemPropsData;
-  last?: boolean;
-}
+type TransactionItemProps = {
+  item: Transaction;
+};
 
-export default function TransactionItem({ item, last }: ItemProps) {
+export default function TransactionItem({ item }: TransactionItemProps) {
   return (
-    <Container last={last}>
+    <Container>
       <DataContainer>
-        <CategoryIcon category={item.category} />
+        <TypeIcon type={item.data.type} />
         <DataTexts>
-          <DataCategory>{item.description}</DataCategory>
-          <DataBillingWay>{item.billingWay}</DataBillingWay>
+          <DataType>{item.data.description}</DataType>
+          <DataBillingWay>{item.data.billingWay}</DataBillingWay>
         </DataTexts>
       </DataContainer>
 
-      {item.category === "Recebido" && (
-        <ValueTextGreen>+ R$ {item.value}</ValueTextGreen>
+      {item.data.type === "Recebido" && (
+        <ValueTextGreen>+ R$ {item.data.value}</ValueTextGreen>
       )}
-      {item.category === "Empréstimo" && (
+      {item.data.type === "Empréstimo" && (
         <ValueTextBlue>
           <Fontisto
             name="arrow-swap"
             color={theme.default.colors.lightPrimary}
             size={13}
           />{" "}
-          R$ {item.value}
+          R$ {item.data.value}
         </ValueTextBlue>
       )}
-      {item.category === "Gasto" && (
-        <ValueTextRed>- R$ {item.value}</ValueTextRed>
+      {item.data.type === "Gasto" && (
+        <ValueTextRed>- R$ {item.data.value}</ValueTextRed>
       )}
     </Container>
   );
