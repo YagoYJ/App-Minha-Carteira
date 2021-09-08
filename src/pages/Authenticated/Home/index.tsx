@@ -32,6 +32,7 @@ export default function Home() {
     firebase
       .firestore()
       .collection("transactions")
+      .limit(3)
       .onSnapshot((query) => {
         var list: Transaction[] = [];
         query.forEach((doc) => {
