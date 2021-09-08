@@ -6,6 +6,8 @@ import Home from "./Home";
 import TransactionsRoutes from "./Transactions/routes";
 import Profile from "./Profile";
 import { theme } from "../../theme";
+import SuccessAnimation from "./Transactions/SuccessAnimation";
+import { View } from "react-native";
 
 export default function AuthRoutes() {
   const AuthTab = createBottomTabNavigator();

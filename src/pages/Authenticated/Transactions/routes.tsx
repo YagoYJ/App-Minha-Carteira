@@ -1,10 +1,11 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
+import Header from "../components/Header";
 import Transactions from ".";
 import TransactionInfo from "./TransactionInfo";
 import TransactionValue from "./TransactionValue";
-import Header from "../components/Header";
+import SuccessAnimation from "./SuccessAnimation";
 
 export default function TransactionsRoutes() {
   const Stack = createStackNavigator();
@@ -29,6 +30,13 @@ export default function TransactionsRoutes() {
         component={TransactionInfo}
         options={{
           header: () => <Header pageName="Adicionar Transação" />,
+        }}
+      />
+      <Stack.Screen
+        name="SuccessAnimation"
+        component={SuccessAnimation}
+        options={{
+          headerShown: false,
         }}
       />
     </Stack.Navigator>

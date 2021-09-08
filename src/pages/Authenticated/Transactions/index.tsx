@@ -201,6 +201,7 @@ export default function Transactions() {
           data={transactions}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => <TransactionItem item={item} />}
+          showsVerticalScrollIndicator={false}
           ListFooterComponent={() => (
             <View
               style={{

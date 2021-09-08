@@ -49,7 +49,7 @@ export default function TransactionInfo() {
 
     firebase.firestore().collection("transactions").add(payload);
 
-    return navigation.navigate("Transactions");
+    return navigation.navigate("SuccessAnimation");
   }
 
   useEffect(() => {
