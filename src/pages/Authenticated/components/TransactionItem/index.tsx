@@ -1,7 +1,12 @@
 import React from "react";
 import { Fontisto, Feather } from "@expo/vector-icons";
+import { Swipeable } from "react-native-gesture-handler";
+import Animated from "react-native-reanimated";
+
 import { theme } from "../../../../theme";
+import firebase from "../../../../configs/firebase";
 import TypeIcon from "./components/TypeIcon";
+
 import {
   Container,
   DataPayment,
@@ -14,8 +19,6 @@ import {
   DeleteButton,
 } from "./styles";
 import { Transaction } from "../../types/transactions";
-import { Swipeable } from "react-native-gesture-handler";
-import Animated from "react-native-reanimated";
 
 type TransactionItemProps = {
   item: Transaction;
@@ -27,7 +30,7 @@ export default function TransactionItem({ item }: TransactionItemProps) {
   }
 
   function handleRemove() {
-    console.log("Remove: ", item);
+    firebase.firestore().collection("transactions").doc(item.id).delete();
   }
 
   return (
