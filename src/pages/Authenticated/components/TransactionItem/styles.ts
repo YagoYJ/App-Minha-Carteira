@@ -1,3 +1,4 @@
+import { RectButton } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 import { theme } from "../../../../theme";
 
@@ -7,13 +8,14 @@ interface ContainerProps {
   last?: boolean;
 }
 
-export const Container = styled.View<ContainerProps>`
+export const Container = styled(RectButton)<ContainerProps>`
   width: 100%;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 0;
-  padding-bottom: ${(props) => (props.last ? "110px" : "10px")};
+  padding: 20px 20px;
+  padding-bottom: ${(props) => (props.last ? "110px" : "20px")};
+  background-color: ${colors.white};
 `;
 
 export const DataContainer = styled.View`
@@ -56,4 +58,16 @@ export const ValueTextRed = styled(ValueText)`
 
 export const ValueTextBlue = styled(ValueText)`
   color: ${colors.lightPrimary};
+`;
+
+export const DeleteButton = styled(RectButton)`
+  width: 60px;
+  height: 60px;
+  background-color: ${colors.red};
+  margin-top: 15px;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  right: 5px;
 `;
