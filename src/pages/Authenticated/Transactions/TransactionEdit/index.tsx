@@ -15,22 +15,25 @@ import {
 import { useEffect } from "react";
 import TypeSelect from "../components/TypeSelect";
 import Calendar from "../components/Calendar";
-import { DateInputProps } from "../../types/transactions";
+import { DateInputProps, Transaction } from "../../types/transactions";
 import firebase from "../../../../configs/firebase";
+import { toDate } from "date-fns/esm";
 
 interface RouteParamsProps {
   key: string;
   name: string;
   params: {
-    value: number;
+    item: Transaction;
   };
 }
 
-export default function TransactionInfo() {
+export default function TransactionEdit() {
+  const [value, setValue] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState("");
   const [payment, setPayment] = useState("");
   const [date, setDate] = useState("");
+  const [dateFormatted, setDateFormatted] = useState<Date>();
   const [buttonDisable, setButtonDisable] = useState(true);
 
   const { params } = useRoute<RouteParamsProps>();
@@ -38,16 +41,20 @@ export default function TransactionInfo() {
 
   const types = ["Selecione", "Recebido", "Gasto", "Empréstimo"];
 
-  function handleSubmit() {
+  function handleEdit() {
     const payload = {
-      ...params,
+      value: Number(value),
       description,
       type: types[Number(type)],
       payment,
       date,
     };
 
-    firebase.firestore().collection("transactions").add(payload);
+    firebase
+      .firestore()
+      .collection("transactions")
+      .doc(params.item.id)
+      .update(payload);
 
     return navigation.navigate("SuccessAnimation");
   }
@@ -60,9 +67,36 @@ export default function TransactionInfo() {
     }
   }, [description, type, payment, date]);
 
+  useEffect(() => {
+    setValue(String(params.item.data.value));
+    setDescription(params.item.data.description);
+    setType(String(types.indexOf(params.item.data.type)));
+    setPayment(params.item.data.payment);
+    setDate(params.item.data.date);
+    const formattedDate = params.item.data.date.split("-");
+    setDateFormatted(
+      new Date(
+        Number(formattedDate[0]),
+        Number(formattedDate[1]),
+        Number(formattedDate[2])
+      )
+    );
+  }, []);
+
   return (
     <Container>
       <Form>
+        <InputContainer>
+          <Label>Valor</Label>
+          <Input
+            placeholder="R$ 100,00"
+            placeholderTextColor={theme.default.colors.gray}
+            value={value}
+            onChangeText={setValue}
+            keyboardType="numeric"
+          />
+        </InputContainer>
+
         <InputContainer>
           <Label>Descrição</Label>
           <Input
@@ -75,7 +109,11 @@ export default function TransactionInfo() {
 
         <InputContainer>
           <Label>Tipo</Label>
-          <TypeSelect type={type} onSelect={setType} defaultValue="Selecione" />
+          <TypeSelect
+            type={type}
+            onSelect={setType}
+            defaultValue={params.item.data.type}
+          />
         </InputContainer>
 
         <InputContainer>
@@ -92,6 +130,8 @@ export default function TransactionInfo() {
           <Label>Data</Label>
           <CalendarContainer>
             <Calendar
+              initialDate={dateFormatted}
+              selectedStartDate={dateFormatted}
               onDateChange={(date) => {
                 const input: DateInputProps = date.creationData()
                   .input as DateInputProps;
@@ -103,8 +143,8 @@ export default function TransactionInfo() {
         </InputContainer>
 
         <SubmitButton
-          text="Cadastrar"
-          onPress={handleSubmit}
+          text="Editar"
+          onPress={handleEdit}
           disabled={buttonDisable}
           style={{ opacity: buttonDisable ? 0.5 : 1 }}
         />

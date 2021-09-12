@@ -8,10 +8,7 @@ export type TransactionData = {
   type: string;
   payment: string;
   value: number;
-  date: {
-    nanoseconds: number;
-    seconds: number;
-  };
+  date: string;
 };
 
 export type DateInputProps = {

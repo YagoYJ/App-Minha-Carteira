@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import Transactions from ".";
 import TransactionInfo from "./TransactionInfo";
 import TransactionValue from "./TransactionValue";
+import TransactionEdit from "./TransactionEdit";
 import SuccessAnimation from "./SuccessAnimation";
 
 export default function TransactionsRoutes() {
@@ -30,6 +31,13 @@ export default function TransactionsRoutes() {
         component={TransactionInfo}
         options={{
           header: () => <Header pageName="Adicionar Transação" />,
+        }}
+      />
+      <Stack.Screen
+        name="TransactionEdit"
+        component={TransactionEdit}
+        options={{
+          header: () => <Header pageName="Editar Transação" />,
         }}
       />
       <Stack.Screen
