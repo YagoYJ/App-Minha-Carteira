@@ -19,14 +19,16 @@ import {
   DeleteButton,
 } from "./styles";
 import { Transaction } from "../../types/transactions";
+import { useNavigation } from "@react-navigation/core";
 
 type TransactionItemProps = {
   item: Transaction;
 };
 
 export default function TransactionItem({ item }: TransactionItemProps) {
+  const navigation = useNavigation();
   function handleInfo() {
-    console.log("Info: ", item);
+    navigation.navigate("TransactionEdit", { item });
   }
 
   function handleRemove() {
