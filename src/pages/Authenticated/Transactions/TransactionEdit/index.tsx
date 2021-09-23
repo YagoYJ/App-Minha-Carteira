@@ -11,13 +11,14 @@ import {
   Input,
   InputContainer,
   Label,
+  ValueInput,
 } from "./styles";
 import { useEffect } from "react";
 import TypeSelect from "../components/TypeSelect";
 import Calendar from "../components/Calendar";
 import { DateInputProps, Transaction } from "../../types/transactions";
 import firebase from "../../../../configs/firebase";
-import { toDate } from "date-fns/esm";
+import { Masks } from "react-native-mask-input";
 
 interface RouteParamsProps {
   key: string;
@@ -42,8 +43,10 @@ export default function TransactionEdit() {
   const types = ["Selecione", "Recebido", "Gasto", "Empréstimo"];
 
   function handleEdit() {
+    const numberValue = Number(value) / 100;
+    console.log("value", numberValue);
     const payload = {
-      value: Number(value),
+      value: numberValue,
       description,
       type: types[Number(type)],
       payment,
@@ -88,12 +91,14 @@ export default function TransactionEdit() {
       <Form>
         <InputContainer>
           <Label>Valor</Label>
-          <Input
-            placeholder="R$ 100,00"
-            placeholderTextColor={theme.default.colors.gray}
+          <ValueInput
+            mask={Masks.BRL_CURRENCY}
             value={value}
-            onChangeText={setValue}
-            keyboardType="numeric"
+            onChangeText={(masked, unmasked, obfuscated) => {
+              setValue(unmasked);
+            }}
+            maxLength={20}
+            keyboardType="number-pad"
           />
         </InputContainer>
 

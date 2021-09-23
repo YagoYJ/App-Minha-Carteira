@@ -3,8 +3,6 @@ import Modal from "react-native-modal";
 import AnimatedLottieView from "lottie-react-native";
 import { useNavigation } from "@react-navigation/core";
 
-import { theme } from "../../../../theme";
-
 import { ModalContent } from "./styles";
 
 export default function SuccessAnimation() {
