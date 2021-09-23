@@ -143,5 +143,4 @@ export const ListContainer = styled.View`
   justify-content: center;
   margin-top: 40px;
   margin-bottom: 40px;
-  padding: 0 5%;
 `;

@@ -1,11 +1,5 @@
 import React from "react";
-import { Fontisto, Feather } from "@expo/vector-icons";
-import { Swipeable } from "react-native-gesture-handler";
-import Animated from "react-native-reanimated";
-
-import { theme } from "../../../../theme";
-import firebase from "../../../../configs/firebase";
-import TypeIcon from "./components/TypeIcon";
+import { Fontisto, Feather, FontAwesome5 } from "@expo/vector-icons";
 
 import {
   Container,
@@ -13,69 +7,72 @@ import {
   DataType,
   DataContainer,
   DataTexts,
-  ValueTextBlue,
-  ValueTextGreen,
-  ValueTextRed,
-  DeleteButton,
+  Icon,
 } from "./styles";
-import { Transaction } from "../../types/transactions";
 import { useNavigation } from "@react-navigation/core";
+import { ValueText } from "./styles";
+import { Transaction } from "../../types/transactions";
+import { TypeLiterals } from "../../types/types";
+import { theme } from "../../../../theme";
+import { RectButtonProps } from "react-native-gesture-handler";
 
-type TransactionItemProps = {
+type TransactionItemProps = RectButtonProps & {
   item: Transaction;
 };
 
-export default function TransactionItem({ item }: TransactionItemProps) {
+export default function TransactionItem({
+  item,
+  ...rest
+}: TransactionItemProps) {
   const navigation = useNavigation();
   function handleInfo() {
     navigation.navigate("TransactionEdit", { item });
   }
 
-  function handleRemove() {
-    firebase.firestore().collection("transactions").doc(item.id).delete();
-  }
-
   return (
-    <Swipeable
-      overshootRight={false}
-      renderRightActions={() => (
-        <Animated.View>
-          <DeleteButton onPress={handleRemove}>
-            <Feather
-              name="trash"
-              size={25}
+    <Container onPress={handleInfo} {...rest}>
+      <DataContainer>
+        <Icon style={{ backgroundColor: TypeLiterals[item.data.type].color }}>
+          {item.data.type === "Recebido" && (
+            <FontAwesome5
+              name="hand-holding-usd"
               color={theme.default.colors.white}
+              size={20}
             />
-          </DeleteButton>
-        </Animated.View>
-      )}
-    >
-      <Container onPress={handleInfo}>
-        <DataContainer>
-          <TypeIcon type={item.data.type} />
-          <DataTexts>
-            <DataType>{item.data.description}</DataType>
-            <DataPayment>{item.data.payment}</DataPayment>
-          </DataTexts>
-        </DataContainer>
-
-        {item.data.type === "Recebido" && (
-          <ValueTextGreen>+ R$ {item.data.value}</ValueTextGreen>
-        )}
-        {item.data.type === "Empréstimo" && (
-          <ValueTextBlue>
+          )}
+          {item.data.type === "Gasto" && (
+            <Feather
+              name="alert-circle"
+              color={theme.default.colors.white}
+              size={20}
+            />
+          )}
+          {item.data.type === "Empréstimo" && (
             <Fontisto
               name="arrow-swap"
-              color={theme.default.colors.lightPrimary}
-              size={13}
-            />{" "}
-            R$ {item.data.value}
-          </ValueTextBlue>
-        )}
-        {item.data.type === "Gasto" && (
-          <ValueTextRed>- R$ {item.data.value}</ValueTextRed>
-        )}
-      </Container>
-    </Swipeable>
+              color={theme.default.colors.white}
+              size={20}
+            />
+          )}
+        </Icon>
+
+        <DataTexts>
+          <DataType>{item.data.description}</DataType>
+          <DataPayment>{item.data.payment}</DataPayment>
+        </DataTexts>
+      </DataContainer>
+
+      <ValueText style={{ color: TypeLiterals[item.data.type].color }}>
+        <Fontisto
+          name={TypeLiterals[item.data.type].prefix}
+          color={TypeLiterals[item.data.type].color}
+          size={13}
+        />{" "}
+        {Intl.NumberFormat("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        }).format(item.data.value)}
+      </ValueText>
+    </Container>
   );
 }

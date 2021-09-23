@@ -1,3 +1,4 @@
+import MaskInput, { MaskInputProps } from "react-native-mask-input";
 import styled from "styled-components/native";
 import { theme } from "../../../../theme";
 
@@ -29,6 +30,16 @@ export const Label = styled.Text`
 `;
 
 export const Input = styled.TextInput`
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #d5dce4;
+  border-radius: 8px;
+  background-color: #fff;
+  font-size: 17px;
+  font-family: ${fonts.rubikRegular};
+  color: ${colors.primary};
+`;
+export const ValueInput = styled(MaskInput)<MaskInputProps>`
   width: 100%;
   padding: 15px;
   border: 1px solid #d5dce4;

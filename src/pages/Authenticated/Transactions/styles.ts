@@ -1,3 +1,4 @@
+import { RectButton } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 import { theme } from "../../../theme";
 
@@ -105,8 +106,26 @@ export const FilterIconContainer = styled.View`
 `;
 
 export const ListContainer = styled.View`
-  padding: 0 20px;
   height: 500px;
+`;
+
+export const ListDivider = styled.View`
+  width: 90%;
+  height: 1px;
+  background-color: ${colors.gray};
+  margin-left: 20px;
+`;
+
+export const DeleteButton = styled(RectButton)`
+  width: 60px;
+  height: 60px;
+  background-color: ${colors.red};
+  margin-top: 15px;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  right: 5px;
 `;
 
 export const AddButton = styled.TouchableOpacity`

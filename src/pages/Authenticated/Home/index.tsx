@@ -86,10 +86,10 @@ export default function Home() {
       </CategoryContainer>
 
       <ListContainer>
-        <MainTitle>Últimas Trasações</MainTitle>
+        <MainTitle style={{ marginLeft: 20 }}>Últimas Trasações</MainTitle>
 
         {transactions.map((item: Transaction) => (
-          <TransactionItem item={item} key={item.id} />
+          <TransactionItem item={item} key={item.id} enabled={false} />
         ))}
       </ListContainer>
     </Container>

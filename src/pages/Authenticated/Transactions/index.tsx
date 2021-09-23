@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Entypo, FontAwesome5, FontAwesome } from "@expo/vector-icons";
+import { Entypo, FontAwesome5, FontAwesome, Feather } from "@expo/vector-icons";
 import Modal from "react-native-modal";
+import { Swipeable } from "react-native-gesture-handler";
+import Animated from "react-native-reanimated";
 import { format } from "date-fns";
 
 import TypeSelect from "./components/TypeSelect";
@@ -24,6 +27,8 @@ import {
   ModalTitle,
   CalendarToggleText,
   ListContainer,
+  DeleteButton,
+  ListDivider,
 } from "./styles";
 
 import Calendar from "./components/Calendar";
@@ -38,7 +43,6 @@ import {
 } from "../types/transactions";
 import { FlatList } from "react-native-gesture-handler";
 import TransactionItem from "../components/TransactionItem";
-import { Text, View } from "react-native";
 
 export default function Transactions() {
   const [calendarVisible, setCalendarVisible] = useState(false);
@@ -96,6 +100,10 @@ export default function Transactions() {
         setDateRange([date]);
       }
     }
+  }
+
+  function handleRemove(id: string) {
+    firebase.firestore().collection("transactions").doc(id).delete();
   }
 
   return (
@@ -200,7 +208,25 @@ export default function Transactions() {
         <FlatList
           data={transactions}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <TransactionItem item={item} />}
+          renderItem={({ item }) => (
+            <Swipeable
+              overshootRight={false}
+              renderRightActions={() => (
+                <Animated.View>
+                  <DeleteButton onPress={() => handleRemove(item.id)}>
+                    <Feather
+                      name="trash"
+                      size={25}
+                      color={theme.default.colors.white}
+                    />
+                  </DeleteButton>
+                </Animated.View>
+              )}
+            >
+              <TransactionItem item={item} />
+            </Swipeable>
+          )}
+          ItemSeparatorComponent={() => <ListDivider />}
           showsVerticalScrollIndicator={false}
           ListFooterComponent={() => (
             <View
